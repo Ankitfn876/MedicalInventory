@@ -1,0 +1,20 @@
+@if (!authService.isLoggedIn()) {
+  <app-login class="fade-in"></app-login>
+} @else {
+  <div class="app-container fade-in">
+    <app-sidebar 
+      [activeTab]="activeTab()" 
+      (tabChanged)="onTabChanged($event)"
+    ></app-sidebar>
+
+    <main class="main-content">
+      @if (activeTab() === 'overview') {
+        <app-overview (navigateTo)="onTabChanged($event)"></app-overview>
+      } @else if (activeTab() === 'inventory') {
+        <app-inventory></app-inventory>
+      } @else if (activeTab() === 'reports') {
+        <app-reports></app-reports>
+      }
+    </main>
+  </div>
+}
